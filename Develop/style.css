@@ -1,0 +1,95 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: monospace;
+    background-color: ivory;
+}
+
+main {
+    margin: 5%;   
+}
+
+/* Quiz header */
+.title {
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.25rem solid black;
+}
+
+/* Highscores */
+.title a {
+
+}
+
+/* Quiz name */
+.title h3 {
+    font-size: 2rem;
+}
+
+/* Timer */
+.title p {
+    
+}
+
+/* Start quiz */
+.start {
+    text-align: center;
+}
+
+.start button {
+    margin-top: 2rem;
+}
+
+/* Main quiz content */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    padding-top: 2rem;
+}
+
+.main-content h6 {
+    text-align: center;
+    font-size: 1rem;
+}
+
+#quiz {
+    display: none;
+}
+.question {
+    text-align: center;
+}
+
+/* Answer selection */
+.main-content ul {
+    list-style: none;
+    text-align: center;
+}
+
+.main-content ul li {
+    padding-top: 1rem;
+}
+
+/* Question result */
+#result {
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Media queries */
+@media screen and (max-width: 600px) {
+
+    .title {
+        flex-direction: column;
+        text-align: center;
+    }
+    .title h3 {
+        font-size: 1.5rem;
+    }
+}
