@@ -12,24 +12,28 @@
 
   <body>
     
-
-    <div class="container">
-      
-        <a href="highscores" id="highscores">Highscores</a>
+      <header class="header">
+        <button class="highscores">Highscores</button>
         <h4 id="title">Javascript Quiz</h4>
-        <p id="timer">Time: </p>
+        <p id="timer">Time: 00:00</p>
+      </header>
+
+      <section class="start invisible">
+        <h2>To begin, press the start button. You will have _ minutes to finish the quiz. Wrong answers will deduct _ seconds. Good luck!</h2>
+        <button id="start-button">Start</button>
+      </section>
+
+      <section class="main-content">
+        <h3 id="question">Question</h3>
+          <ul>
+            <li><button class="btn">Answer 1</button></li>
+            <li><button class="btn">Answer 2</button></li>
+            <li><button class="btn">Answer 3</button></li>
+            <li><button class="btn">Answer 4</button></li>
+          </ul>
+        <h5 id="result">Correct!/Incorrect!</h5>
+      </section>
       
-          <section class="main-content">
-            <h3 id="question">Question</h3>
-            <ul>
-              <li><button class="btn">Answer 1</button></li>
-              <li><button class="btn">Answer 2</button></li>
-              <li><button class="btn">Answer 3</button></li>
-              <li><button class="btn">Answer 4</button></li>
-            </ul>
-            <h5 id="result">Correct/Incorrect</h5>
-          </section>
-      </div>
       
 
     
