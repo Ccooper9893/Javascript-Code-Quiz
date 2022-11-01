@@ -1,27 +1,27 @@
 //Selecting HTML elements
 var startbutton = document.querySelector('#start-menu');
-var mainContent = document.querySelector('#quiz');
+var mainContent = document.querySelector('#quiz'); //Selects the main content container
 var timer = document.querySelector('#timeLeft');
 var question = document.querySelector('#question');
-var answer1 = document.querySelector('#answer1');
-var answer2 = document.querySelector('#answer2');
-var answer3 = document.querySelector('#answer3');
-var answer4 = document.querySelector('#answer4');
+var answers = document.querySelectorAll('#answer');
+    var answersArr = Array.prototype.slice.call(answers); //Combined answer node array
 var result = document.querySelector('#result');
 
+console.log(answersArr);
+//Timer length
 var secondsLeft = 100;
 
-console.log(answer2.textContent);
 
 
-//Start button functionality
+//Start button makes startpage invisible and makes main content visible
 startbutton.addEventListener('click', function() {
     startbutton.classList.add('invisible');
     mainContent.classList.remove('invisible');
 
     //Calls startTime function
     startTime();
-    page1();
+    //Calls for the first question
+    nextPage();
 });
 
 //Timer
@@ -30,46 +30,90 @@ function startTime () {
         secondsLeft--;
         timer.textContent = secondsLeft;
 
-        if (secondsLeft === 0) {
-
+        if (secondsLeft <= 0) {
+            //Call game over function
         }
-    }, 1000);
-    
+        
+    }, 1000);    
 }
 
+var pageCount = 0;
 
-function page1 () {
-    
-    question.textContent = questionList.Q1;
-    answer1.textContent = questionList.Q1A1;
-    answer2.textContent = questionList.Q1A2;
-    answer3.textContent = questionList.Q1A3;
-    answer4.textContent = questionList.Q1A4;
-    
+function nextPage () {
+
+    pageCount++;
+
+    if (pageCount === 1) {
+        question.textContent = questionArray[0];
+        for (i=1; i<contentLength.length; i++) {
+            answersArr[i-1].textContent = content.P.questionAnswers[i];
+            } 
+    }
+  
 };
 
 
-//Questions and Answers
-var questionList = {
+//------------------------------------------------------Questions and Answers---------------------------------------------------------------------------
+[Symbol('age')]
+var content = {
     
-    Q3:'',
-    Q4:'',
-    Q5:'',
-    Q6:'',
-    Q7:'',
-    Q8:'',
-    Q9:'',
-    Q10:'',
+    P1: { Q1: 'What is Javascript?',
+        [Symbol('A1')]: 'Webrogramming language for the web', //Correct
+        [Symbol('A2')]: 'Type of coffee',
+        [Symbol('A3')]: 'Meaning of life',
+        [Symbol('A4')]: 'All of the above'},
 
-    Q1: 'What is Javascript?',
-        Q1A1: 'Webrogramming language for the web', //Correct
-        Q1A2: 'Type of coffee',
-        Q1A3: 'Meaning of life',
-        Q1A4: 'All of the above',
+    P: { Q1: 'What tag must be used to link Javascript to HTML?',
+        [Symbol('A1')]: '<link>',
+        [Symbol('A2')]: '<head>',
+        [Symbol('A3')]: '<body>',
+        [Symbol('A4')]: 'None of the above'},
 
-    Q2:'',
-        Q2A1: '',
-        Q2A2: '',
-        Q2A3: '',
-        Q2A4: '',
+    P: { Q1: '',
+        [Symbol('A1')]: '',
+        [Symbol('A2')]: '',
+        [Symbol('A3')]: '',
+        [Symbol('A4')]: ''},
+
+    
+
+
 }
+
+
+//Makes an array of answers and questions-------------------------------------------------------
+var questionArray = [];
+var contentLength = Object.keys(content);
+var questionAnswers = [];
+
+console.log(questionArray);
+
+
+//Creates an array of answers that exist in the content object 0-3
+for (i=0; i<contentLength.length; i++) {
+    questionAnswers[i] = Object.getOwnPropertySymbols(content.P);
+}
+
+//Creates an array of questions that exist in the content object
+for (i=0; i<contentLength.length; i++) {
+    questionArray[i] = (content[contentLength[i]].Q1);
+}
+
+
+
+/* -----------------------------------Saved experimental code------------------------------------- */
+
+// var answerText = [];
+// for (i=0; i<answersArr.length; i++) {
+//     answerText.push(answersArr[i].textContent);// Combines text contents of answerArr into array
+// }
+
+// var arr = [];
+// // arr.push(answer1, answer2, answer3, answer4);
+// // console.log(arr); //["hello", "good"]
+
+
+var pages = [];
+for (i=0; i<content.length; i++) {
+}
+
