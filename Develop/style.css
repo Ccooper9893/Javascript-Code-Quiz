@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: monospace;
+    font-family:monospace;
     color:indigo;
     background-image: url(ripples.png);
     background-repeat: repeat;
@@ -19,6 +19,7 @@ body {
     justify-content: space-between;
     align-items: center;
     margin: 1rem 10% 1rem 10%;
+    border-bottom: 0.05rem solid black;
 }
 
 #title {
@@ -46,7 +47,6 @@ body {
 }
 
 /* Start */
-
 .start {
     color: black;
 }
@@ -83,6 +83,7 @@ body {
     list-style: none;
 }
 
+/* Choose an answer*/
 .btn {
     border: 0.1rem solid black;
     font-size: 1rem;
@@ -95,14 +96,16 @@ body {
 .btn:hover {
     border: 0.1rem dashed black;
     box-shadow: 0 0 3px indigo;
+    font-weight: bold;
 }
 
+/* Correct/Incorrect */
 #result {
     font-size: 1rem;
     margin-top: 2rem;
 }
 
-/* Debugging */
+/* Visibility of elements */
 .invisible {
     display: none;
 }
