@@ -12,33 +12,52 @@
 
   <body>
     
-      <header class="header">
-        <button class="highscores">Highscores</button>
-        <h4 id="title">Javascript Quiz</h4>
-        <p id="timer">Time: <span id=timeLeft>100</span></p>
+      <!--Highscores, Title, and Timer container-->
+      <header class="header"> 
+        <button class="highscores">Highscores</button> <!-- JS  -->
+        <h2 id="title">Javascript Quiz</h2>
+        <p id="timer">Time: <span id=timeLeft>100</span></p> <!-- JS  -->
       </header>
 
-      <section class="start" id="start-menu">
-        <h2>To begin, press the start button. You will have _ minutes to finish the quiz. Wrong answers will deduct _ seconds. Good luck!</h2>
-        <button id="start-button">Start</button>
-      </section>
 
-      <section class="main-content invisible" id="quiz">
-        <h3 id="question">Question</h3>
+      <!--Start menu container-->
+      <div class="start" id="start-menu"> <!-- JS  -->
+        <h3 id="begin-text">To begin, press the start button. You will have _ minutes to finish the quiz. Wrong answers will deduct _ seconds. Good luck!</h3>
+        <button id="start-button">Start</button> <!-- JS  -->
+      </div>
+
+
+      <!--Questions and Answers container-->
+      <div class="main-content" id="quiz"> <!-- JS  -->
+        <h4 id="question">What statement creates a loop that executes as long as the condition is (!true)?</h4>
           <ul>
-            <li><button class="btn" id="answer"></button></li>
-            <li><button class="btn" id="answer">It works!</button></li>
-            <li><button class="btn" id="answer">Answer 3</button></li>
-            <li><button class="btn" id="answer">Answer 4</button></li>
+            <li><button class="btn" id="answer1">for</button></li> <!-- JS  -->
+            <li><button class="btn" id="answer2">do while</button></li> <!-- JS  -->
+            <li><button class="btn" id="answer3">while</button></li> <!-- JS  -->
+            <li><button class="btn" id="answer4">if else</button></li> <!-- JS  -->
           </ul>
-        <h5 id="result">Correct!/Incorrect!</h5>
-      </section>
-      
-      
+        <h5 id="result">Result</h5> <!-- JS  -->
+        </div>
 
-    
+
+      <!--Save-Submit form container-->
+      <div class="main-content" id="submit-form"> <!-- JS  -->
+        <h5 id="result-title">Score</h5>
+        <score id="score-result">N/A</score> <!-- JS  -->
+        <p id="initials">Enter your initials to save your score!</p>
+        <input type="text" id="initial-submit" placeholder="Initials"/> <!-- JS  -->
+        <button id="submit-button">Submit</button> <!-- JS  -->
+      </div>
+
+      <div class="highscores-page main-content"> <!-- JS  -->
+        <h6 id="result-title">Saved Highscores</h6>
+        <ul class="saved-highscores"> <!-- JS  -->
+        </ul>
+        <button id="reset-button">Reset</button> <!-- JS  -->
+      </div>
 
   </body>
     
     <script src="Develop/script.js"></script>
-  </html>
+
+</html>

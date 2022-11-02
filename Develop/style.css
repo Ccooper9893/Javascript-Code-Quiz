@@ -28,15 +28,15 @@ body {
 
 .highscores {
     font-size: 0.95rem;
-    color: white;
-    background: black;
-    box-shadow: 0 0 3px rgb(11, 11, 11);
-    transition: 0.5s;
+    color: black;
+    border: none;
+    text-decoration: underline;
 }
 
-.highscores:hover, #start-button:hover {
-    background-color: indigo;
-    box-shadow: 0 0 10px rgb(11, 11, 11);
+
+.highscores:hover {
+    text-decoration: none;
+    color: indigo;
 }
 
 #timer {
@@ -46,23 +46,32 @@ body {
     box-shadow: 0 0 3px rgb(11, 11, 11);
 }
 
-/* Start */
+/* Start page */
 .start {
     color: black;
 }
 
-#start-button {
+#start-button, #submit-button, #reset-button {
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: white;
     margin: 1rem 30% 1rem 30%;
     height: 2rem;
+    border-radius: 1rem;
     background-color: black;
     box-shadow: 0 0 3px rgb(11, 11, 11);
     transition: 0.5s;
 }
 
+#start-button:hover, #submit-button:hover, #reset-button:hover {
+    background-color: indigo;
+    box-shadow: 0 0 10px rgb(11, 11, 11);
+}
 
-/* Questions and Answers */
+#begin-text, #initials, .saved-highscores {
+    font-size: 1.2rem;
+}
+
+/* Questions page */
 .main-content, .start {
     display: flex;
     flex-wrap: wrap;
@@ -83,7 +92,7 @@ body {
     list-style: none;
 }
 
-/* Choose an answer*/
+/* Answer buttons */
 .btn {
     border: 0.1rem solid black;
     font-size: 1rem;
@@ -109,3 +118,27 @@ body {
 .invisible {
     display: none;
 }
+
+/* Submit form page */
+#result-title {
+    font-size: 1.8rem;
+    text-decoration: underline;
+}
+
+#score-result {
+    font-size: 3rem;
+    color: #31BE2A;
+    margin-bottom: 1rem;
+}
+
+#initial-submit {
+    margin: 0 auto;
+    width: 60%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size:1rem;
+    text-align: center;
+}
+
+/* Highscores page */
+
