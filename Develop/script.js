@@ -9,7 +9,7 @@
 
 //-----------------------Create variables that are selected html elements-------------------------
 //Header elements
-var highscoresLink = document.querySelector('#highscores');
+var highscoreButton = document.querySelector('#highscore-btn');
 var timerLink = document.querySelector('#timer');
 var timeLeft = document.querySelector('#timeLeft');
 
@@ -37,11 +37,12 @@ var submitButton = document.querySelector('#submit-button');
 var highscoresMenu = document.querySelector('#highscores-page');
 var highscoreList = document.querySelector('#saved-highscores');
 var resetQuizButton = document.querySelector('#reset-button');
-var highscoreButton = document.querySelector('#highscore-btn');
+var resetScores = document.querySelector('#clear-button');
 
 //Score
 var currentScore = 0; //Creates a score variable
 var scoreList = []; //Makes an array for saved scores
+var secondsLeft = 0 //Sets the timer to 0
 
 //Question number index
 var currentQuestion = 0;
@@ -49,24 +50,35 @@ var currentQuestion = 0;
 //Initals
 var initialList = [];
 
-//Link to highscore page
-highscoreButton.addEventListener('click', highscoreLink);
 
 //--------------------Sets the visibility of the pages-------------------------
 questionMenu.style.display = 'none';
 highscoresMenu.style.display = 'none';
 submitMenu.style.display = 'none';
 
+
+//------------------------Event Listeners-------------------------------
+
+startButton.addEventListener('click', startGame); //Start button
+answer1.addEventListener('click', selectAnswer); //Answer choices
+answer2.addEventListener('click', selectAnswer);
+answer3.addEventListener('click', selectAnswer);
+answer4.addEventListener('click', selectAnswer);
+submitButton.addEventListener('click', highScorePage); //Submit initials/scores
+resetQuizButton.addEventListener('click', reset); //Reset quiz
+highscoreButton.addEventListener('click', highscoreLinkPage); //Link to highscores
+resetScores.addEventListener('click', clearScores); //Deletes previously saved highscores.
+
+
 //----------------------------------Set timer-----------------------------------
-var secondsLeft = 0
+
 
 function setTime() {
     secondsLeft = 100;
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeLeft.textContent = secondsLeft;
-
-        if (secondsLeft <= 0) {
+        if (secondsLeft <= 1) {
             submitMenu.style.display = '';
             questionMenu.style.display = 'none';
             clearInterval(timerInterval);
@@ -74,22 +86,24 @@ function setTime() {
     }, 1000)
 }
 
+// pullStorage();
 
-//-----------------------Sets the visibility of the pages----------------
-questionMenu.style.display = 'none';
-highscoresMenu.style.display = 'none';
-submitMenu.style.display = 'none';
+// //---------------------------Pull localStorage-------------------------------
+// function pullStorage () {
+//     scoreList = localStorage.getItem('Initials');
+//     initialList = localStorage.getItem('Score');
+// }
 
-//-------------------Start Game functionality ---------------------------
-var startGame = function () {
+//----------------------------Start Game Function ---------------------------
+function startGame () {
 
     //Starts timer
     setTime();
-
+    init();
     //Hides start menu and displays question menu
     startMenu.style.display = 'none';
     questionMenu.style.display = '';
-    
+    tempResult.textContent = ''
     //Inserts the first question and answers into the element
     questionText.textContent = questions[0].question;
 
@@ -100,19 +114,21 @@ var startGame = function () {
 
 }
 
-//Listens for start button to be clicked
-startButton.addEventListener('click', startGame);
+//Function will run when page loads. Grabs previous highscores from local storage
+function init() {
+    // Get stored scores from localStorage
+    var storedScores = JSON.parse(localStorage.getItem('scoreList'));
+    var storedInitials = JSON.parse(localStorage.getItem('initalList'));
+
+    // If there are stored scores updated score list
+    if (storedScores !== null) {
+        initialList += storedInitials;
+        scoreList += storedScores;
+    }
+}
 
 
-//------------------------Answer Selection functionaliy--------------------------
-
-
-
-//Listens for answers be clicked
-answer1.addEventListener('click', selectAnswer);
-answer2.addEventListener('click', selectAnswer);
-answer3.addEventListener('click', selectAnswer);
-answer4.addEventListener('click', selectAnswer);
+//------------------------Answer Selection Function--------------------------
 
 
 function selectAnswer(event) {
@@ -135,11 +151,7 @@ function selectAnswer(event) {
     }
     
    
-    
-
-
-
-//--------------------------Next Question---------------------------//
+//--------------------------Next Question Function---------------------------//
 function nextQuestion() {
 
     if (currentQuestion === questions.length) {
@@ -165,50 +177,51 @@ function gameOver() {
     questionMenu.style.display = 'none';
 
     //Resets time
-    secondsLeft = 0;
+    secondsLeft = 1;
     timeLeft.textContent = secondsLeft;
+
     //Displays score in submitMenu page.
     scoreResult.textContent = currentScore;
 
     //Pushes score to scoreList array.
     scoreList.push(currentScore);
-
-    // initialFill.textContent = // --------------------------------------Need help saving initials/score to array and pushing  to local storage.
-
-    //Creates list items to display current and past saved scores
 }
 
-submitButton.addEventListener('click', highScorePage);
+
 
 //-------------------------------Highscores Page-------------------------------------------
-function highscoreLink () {
+
+
+//Top left link to highscores page
+function highscoreLinkPage () {
     startMenu.style.display = 'none'
     submitMenu.style.display = 'none';
     highscoresMenu.style.display = '';
-    listHighcores();
 }
 
+//Post quiz highscores
 function highScorePage () {
+
+    //Pushes initials into array
     initialList.push(initialFill.value);
+
+    //Sets visibility of pages
     submitMenu.style.display = 'none';
     highscoresMenu.style.display = '';
-    localStorage.setItem('Score:', currentScore);
-    localStorage.setItem('Initials:', initialFill.value);
+
+    //Stores score in local storage !Needs work
+    localStorage.setItem('Score:', scoreList);
+    localStorage.setItem('Initials:', initialList);
     
     //Creates a list item
     var li = document.createElement('li');
 
     //Fill list element with Initials and score
-    li.innerText = `Player: ${initialFill.value} ---|--- Score: ${currentScore}`;
+    li.innerText = `Player: ${initialFill.value} | Score: ${currentScore}`;
 
     //Inserts li into highscoreList ul
     highscoreList.append(li);       
-    }
-
-function listHighcores (e) {
-    
 }
-resetQuizButton.addEventListener('click', reset);
 
 
 //Resets the quiz
@@ -217,10 +230,18 @@ function reset () {
     highscoresMenu.style.display = 'none';
     submitMenu.style.display = 'none';
     startMenu.style.display = '';
+
+    //Resets Score
     currentScore = 0;
     currentQuestion = 0;
 }
 
+function clearScores () {
+    highscoreList.innerHTML = '';
+    initialList = [];
+    scoreList = [];
+    localStorage.clear();
+}
 
 /* ------------------------------Questions/Answers-----------------------------------------*/
 
@@ -284,31 +305,10 @@ var questions = [
 
 //------------------------------------Experimental Code -----------------------------------------------------
 
-//Function will run when page loads.
-// function init() {
-//     // Get stored scores from localStorage
-//     var storedScores = JSON.parse(localStorage.getItem('scoreList'));
-//     var storedInitials = JSON.parse(localStorage.getItem('initalList'));
-
-//     // If there are stored scores updated score list
-//     if (storedScores !== null) {
-//         initialList = storedInitials;
-//         scoreList = storedScores;
-//     }
-// }
-
 // function storedScores () {
 //     localStorage.setIem('scoreList', JSON.stringify(scoreList));
 // }
 
-//Listing the scores on the 
-           // scoreList.forEach(function(e) {
-            //     initialList.forEach(function (e) {   
-            //     var li = document.createElement('li')
-            //     li.innerText = initial;
-            //     highscoreList.append(li)
-        
-            
-                 
+
 
 
