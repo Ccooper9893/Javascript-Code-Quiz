@@ -14,9 +14,9 @@
     
       <!--Highscores, Title, and Timer container-->
       <header class="header"> 
-        <button class="highscores">Highscores</button> <!-- JS  -->
+        <button class="highscores" id="highscore-btn">Highscores</button> <!-- JS  -->
         <h2 id="title">Javascript Quiz</h2>
-        <p id="timer">Time: <span id=timeLeft>100</span></p> <!-- JS  -->
+        <p id="timer">Time: <span id=timeLeft></span></p> <!-- JS  -->
       </header>
 
 
@@ -51,7 +51,7 @@
 
       <div id="highscores-page" class="main-content"> <!-- JS  -->
         <h6 id="result-title">Saved Highscores</h6>
-        <ul id="saved-highscores"> <!-- JS  -->
+        <ul class="savedEntries" id="saved-highscores"> <!-- JS  -->
         </ul>
         <button id="reset-button">Reset</button> <!-- JS  -->
       </div>

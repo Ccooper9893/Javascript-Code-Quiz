@@ -142,3 +142,11 @@ body {
 
 /* Highscores page */
 
+.savedEntries {
+    margin-bottom: 1rem;
+}
+
+.savedEntries li {
+   margin: 0.5rem;
+
+}
