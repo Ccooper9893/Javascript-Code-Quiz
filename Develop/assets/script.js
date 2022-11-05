@@ -196,6 +196,10 @@ function highscoreLinkPage () {
                 //Inserts li into highscoreList ul
                 highscoreList.append(li);
         }
+    } else {
+        highscoresMenu.style.display = ''
+        startMenu.style.display = 'none';
+        submitMenu.style.display = 'none';
     }
 }
 
@@ -354,25 +358,5 @@ var questions = [
                 correct: 'null' 
     },
 ]
-
-
-
-// var questionsArr = [ //Great question format
-//     { question: 'What is true?', 
-//         answers: ['true', 'false', 'false', 'false'], 
-//             correct: 'true'
-//     }]
-// var answer1 = document.querySelector('#answer1');
-// var answer2 = document.querySelector('#answer2');
-// var answer3 = document.querySelector('#answer3');
-// var answer4 = document.querySelector('#answer4');
-// var answerArr = [answer1, answer2, answer3, answer4];
-// for (i=0; i<4; i++) { //plugs in 4 answers into buttons
-//     answerArr[i].textContent = questions[currentQuestion].answers[i];
-// }
-// function selectAnswer(event) { //When clicking event/btn check value and if it equals correct value
-// if (event.target.innerText === questions[currentQuestion].correct) {
-//     //true
-// }}
 
 
