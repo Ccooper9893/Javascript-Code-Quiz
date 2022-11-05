@@ -1,11 +1,3 @@
-//Step 1: Create variables for important element selectors
-//Step 2: Create variables for time and scores
-//Step 3: Create question objects
-//Step 3: Hide pages (except for start page)
-//Step 4: Retrieve previous highscores to store in local storage
-//Step 5: Create functions
-//Step 6: Create Event Listers
-//Step 7: Save scores and initials
 
 //-----------------------Create variables that are selected html elements-------------------------
 //Header elements
@@ -77,18 +69,14 @@ function setTime() {
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeLeft.textContent = secondsLeft;
-        if (secondsLeft < 1) {
-            secondsLeft = 0;
+        if (secondsLeft <=0) {
             submitMenu.style.display = '';
             questionMenu.style.display = 'none';
+            clearInterval(timerInterval);  
+            gameOver();
+        } else if (currentQuestion === questions.length) {
             clearInterval(timerInterval);
-            //Displays score in submitMenu page.
-            scoreResult.textContent = currentScore;
-            scoreList.push(currentScore);
-
-
-
-        } 
+        }
     }, 1000)
 }
 
@@ -179,7 +167,7 @@ function gameOver() {
     resetQuizButton.innerHTML = 'Retake Quiz';
 
     //Resets time
-    secondsLeft = 1;
+    secondsLeft = 40;
     timeLeft.textContent = secondsLeft;
 
     //Displays score in submitMenu page.
@@ -367,5 +355,24 @@ var questions = [
     },
 ]
 
+
+
+// var questionsArr = [ //Great question format
+//     { question: 'What is true?', 
+//         answers: ['true', 'false', 'false', 'false'], 
+//             correct: 'true'
+//     }]
+// var answer1 = document.querySelector('#answer1');
+// var answer2 = document.querySelector('#answer2');
+// var answer3 = document.querySelector('#answer3');
+// var answer4 = document.querySelector('#answer4');
+// var answerArr = [answer1, answer2, answer3, answer4];
+// for (i=0; i<4; i++) { //plugs in 4 answers into buttons
+//     answerArr[i].textContent = questions[currentQuestion].answers[i];
+// }
+// function selectAnswer(event) { //When clicking event/btn check value and if it equals correct value
+// if (event.target.innerText === questions[currentQuestion].correct) {
+//     //true
+// }}
 
 
