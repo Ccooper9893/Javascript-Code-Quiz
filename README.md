@@ -1,5 +1,7 @@
 # Javascript-Code-Quiz
-A timed code quiz asking questions about Javascript. Answer the questions wrong, lose time. When the quiz is finished enter your initials to save your high-score.
+
+## Description
+A timed code quiz asking questions about Javascript. Answer the questions wrong, lose time. When the quiz is finished enter your initials to save your high-score. This challenge has helped me learn the use of HTML DOM API. This includes DOM traversing, event listeners, timers intervals, and localStorage capabilities.
 
 ## User Story
 - AS A coding boot camp student
@@ -18,3 +20,11 @@ A timed code quiz asking questions about Javascript. Answer the questions wrong,
 - THEN the game is over
 - WHEN the game is over
 - THEN I can save my initials and score
+
+## Screenshots
+
+### Wireframe
+<img src='Develop/assets/Popquiz Wireframe.png'>
+
+### Finished website
+<img src='Develop/assets/QuizScreenshot.png'>

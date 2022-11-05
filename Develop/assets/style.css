@@ -5,10 +5,15 @@
     box-sizing: border-box;
 }
 
+:root {
+    --lime-color: #87FE00;
+    --dark-text-color: black;
+    --goog-font: 'Dosis', sans-serif;
+}
 body {
-    font-family:monospace;
-    color:indigo;
-    background-image: url(ripples.png);
+    margin-top: 3rem;
+    font-family: var(--goog-font);
+    background-image: url(hexellence.png);
     background-repeat: repeat;
 }
 
@@ -16,12 +21,15 @@ body {
 .header {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin: 1rem 10% 1rem 10%;
     border-bottom: 0.05rem solid black;
 }
-
+.header button, .header p, .header h2 {
+    margin-left: 3%;
+    margin-right: 3%;
+}
 #title {
     font-size: 2rem;
 }
@@ -45,23 +53,22 @@ body {
 
 /* Start page */
 .start {
-    color: black;
+    color: var(--dark-text-color);
 }
 
 #start-button, #submit-button, #reset-button, #clear-button {
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: white;
+    font-family: var(--goog-font);
     margin: 1rem 30% 1rem 30%;
     height: 2rem;
-    border-radius: 1rem;
-    background-color: black;
+    border-radius: 0.5rem;
     box-shadow: 0 0 3px rgb(11, 11, 11);
     transition: 0.5s;
+    font-weight: bold;
+    background-color: white;
 }
 
-#start-button:hover, #submit-button:hover, #reset-button:hover {
-    background-color: indigo;
-    box-shadow: 0 0 10px rgb(11, 11, 11);
+#start-button:hover, #reset-button:hover {
+    background-color: var(--lime-color);
 }
 
 #begin-text, #initials, #saved-highscores {
@@ -75,7 +82,7 @@ body {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    color: black;
+    color: var(--dark-text-color);
     margin: 4rem 25% 2rem 25%;
 }
 
@@ -92,6 +99,7 @@ body {
 /* Answer buttons */
 .btn {
     border: 0.1rem solid black;
+    background-color:white;
     font-size: 1rem;
     width: 30vw;
     height: 10vh;
@@ -107,7 +115,7 @@ body {
 
 /* Correct/Incorrect */
 #result {
-    font-size: 1rem;
+    font-size: 2rem;
     margin-top: 2rem;
 }
 
@@ -124,7 +132,7 @@ body {
 
 #score-result {
     font-size: 3rem;
-    color: #31BE2A;
+    color: #87FE00;
     margin-bottom: 1rem;
 }
 
@@ -144,13 +152,35 @@ body {
 }
 
 .savedEntries li {
-font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+font-family: var(--goog-font);
    margin-top: 2rem;
    color:indigo;
 }
 
 #clear-button:hover {
     background-color: red;
-    color:black;
+    color:var(--dark-text-color);
     box-shadow: 0 0 10px rgb(11, 11, 11);
 }
+
+@media screen and (max-width: 500px) {
+    * {
+        font-size: 90%;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .btn {
+        font-size: 0.8rem;
+        height: 5vh; 
+    }
+
+    #result {
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+}   
+

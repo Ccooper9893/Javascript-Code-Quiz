@@ -24,7 +24,7 @@ var answer1 = document.querySelector('#answer1');
 var answer2 = document.querySelector('#answer2');
 var answer3 = document.querySelector('#answer3');
 var answer4 = document.querySelector('#answer4');
-var answerArr = [answer1, answer2, answer3, answer4]
+var answerArr = [answer1, answer2, answer3, answer4];
 var tempResult = document.querySelector('#result');
 
 //Score Result Page
@@ -42,24 +42,25 @@ var resetScores = document.querySelector('#clear-button');
 //Score
 var currentScore = 0; //Creates a score variable
 var scoreList = []; //Makes an array for saved scores
-var secondsLeft = 0 //Sets the timer to 0
-
+var secondsLeft = 100 //Sets the timer to 0
+timeLeft.textContent = secondsLeft;
 //Question number index
 var currentQuestion = 0;
 
 //Initals
 var initialList = [];
 
+//Pulls highscores from local storage when page is opened
+var localScores = JSON.parse(localStorage.getItem('Score'));
+var localInitials = JSON.parse(localStorage.getItem('Initials'));
 
 //--------------------Sets the visibility of the pages-------------------------
 questionMenu.style.display = 'none';
 highscoresMenu.style.display = 'none';
 submitMenu.style.display = 'none';
 
-
-//------------------------Event Listeners-------------------------------
-
-startButton.addEventListener('click', startGame); //Start button
+/*------------------------Event Listeners-------------------------------*/
+startButton.addEventListener('click', startInput); //Start button
 answer1.addEventListener('click', selectAnswer); //Answer choices
 answer2.addEventListener('click', selectAnswer);
 answer3.addEventListener('click', selectAnswer);
@@ -69,41 +70,44 @@ resetQuizButton.addEventListener('click', reset); //Reset quiz
 highscoreButton.addEventListener('click', highscoreLinkPage); //Link to highscores
 resetScores.addEventListener('click', clearScores); //Deletes previously saved highscores.
 
-
-//----------------------------------Set timer-----------------------------------
-
-
+/*-------------------------------------------Functions--------------------------------------------------*/
+//Sets timer
 function setTime() {
     secondsLeft = 100;
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeLeft.textContent = secondsLeft;
-        if (secondsLeft <= 1) {
+        if (secondsLeft < 1) {
+            secondsLeft = 0;
             submitMenu.style.display = '';
             questionMenu.style.display = 'none';
             clearInterval(timerInterval);
+            //Displays score in submitMenu page.
+            scoreResult.textContent = currentScore;
+            scoreList.push(currentScore);
+
         } 
     }, 1000)
 }
 
-// pullStorage();
+//Retake Quiz timer
+function startInput () {
+    startButton.innerHTML = 'Goodluck!';
+    setTimeout(startGame, 500);
+}
 
-// //---------------------------Pull localStorage-------------------------------
-// function pullStorage () {
-//     scoreList = localStorage.getItem('Initials');
-//     initialList = localStorage.getItem('Score');
-// }
-
-//----------------------------Start Game Function ---------------------------
+//Starts quiz
 function startGame () {
-
+    for (i=0; i<4; i++) { answerArr[i].style.background = '#FFFFFF';}
+    startButton.innerHTML = 'Start Quiz';
     //Starts timer
     setTime();
-    init();
+    // init();
     //Hides start menu and displays question menu
     startMenu.style.display = 'none';
     questionMenu.style.display = '';
-    tempResult.textContent = ''
+    tempResult.textContent = '';
+    highscoresMenu.style.display = 'none';
     //Inserts the first question and answers into the element
     questionText.textContent = questions[0].question;
 
@@ -114,46 +118,41 @@ function startGame () {
 
 }
 
-//Function will run when page loads. Grabs previous highscores from local storage
-function init() {
-    // Get stored scores from localStorage
-    var storedScores = JSON.parse(localStorage.getItem('scoreList'));
-    var storedInitials = JSON.parse(localStorage.getItem('initalList'));
-
-    // If there are stored scores updated score list
-    if (storedScores !== null) {
-        initialList += storedInitials;
-        scoreList += storedScores;
-    }
-}
-
-
-//------------------------Answer Selection Function--------------------------
-
-
+//Answer selection
 function selectAnswer(event) {
     
     //Checking if selected answer is correct/incorrect
         if (event.target.innerText === questions[currentQuestion].correct) {
-            tempResult.textContent = 'Correct!'
+            //Styling
+            tempResult.textContent = '+25 points!';
+            tempResult.style.color = '#87FE00';
+            event.target.style.background = '#87FE00';
+            event.target.innerText = 'Correct!'
+
+            //Score update
             currentScore = currentScore += 25;
-            console.log('Correct');
             currentQuestion++;
+            ;
         } else {
-            tempResult.textContent = 'Incorrect!'
+            //Styling
+            tempResult.textContent = '-10 seconds!';
+            tempResult.style.color = '#E83737';
+            event.target.style.background = '#E83737';
+            event.target.innerText = 'Incorrect!';
+            timeLeft.style.color = '#E83737';
+            //Score update
             secondsLeft -= 10;
-            console.log('Incorrect');
             currentQuestion++;
         }
 
-         //Goes to next quiz question
-            nextQuestion();
+        setTimeout(nextQuestion, 1000);
     }
     
-   
-//--------------------------Next Question Function---------------------------//
+//Next Question
 function nextQuestion() {
-
+    tempResult.textContent = '';
+    tempResult.style.color = 'none';
+    timeLeft.style.color = 'black'
     if (currentQuestion === questions.length) {
         //Ends game and calls gameOver function
         gameOver();
@@ -164,17 +163,18 @@ function nextQuestion() {
 
         //Inserts answers into buttons
         for (i=0; i<4; i++) {
+        answerArr[i].style.background = '#FFFFFF';
         answerArr[i].textContent = questions[currentQuestion].answers[i];
     }
     }
 }
 
 
-//-------------------------------  Gameover Page-------------------------------------------
-
+//Game Over
 function gameOver() {
     submitMenu.style.display = '';
     questionMenu.style.display = 'none';
+    resetQuizButton.innerHTML = 'Retake Quiz';
 
     //Resets time
     secondsLeft = 1;
@@ -187,64 +187,78 @@ function gameOver() {
     scoreList.push(currentScore);
 }
 
-
-
-//-------------------------------Highscores Page-------------------------------------------
-
-
-//Top left link to highscores page
+//Displays highscores
 function highscoreLinkPage () {
-    startMenu.style.display = 'none'
-    submitMenu.style.display = 'none';
-    highscoresMenu.style.display = '';
+    var localScores = JSON.parse(localStorage.getItem('Score'));
+    var localInitials = JSON.parse(localStorage.getItem('Initials'));
+    if (localScores !== null && questionMenu.style.display === 'none' && highscoresMenu.style.display === 'none') {
+        highscoresMenu.style.display = '';
+        startMenu.style.display = 'none';
+        submitMenu.style.display = 'none';
+
+        for (i=0; i<localInitials.length; i++) {
+                //Creates a list item
+                var li = document.createElement('li');
+
+                //Fill list element with Initials and score
+                li.innerText = `Player: ${localInitials[i]} | Score: ${localScores[i]}`;
+
+                //Inserts li into highscoreList ul
+                highscoreList.append(li);
+        }
+    }
 }
 
-//Post quiz highscores
+//Post quiz highscores after submitting your score
 function highScorePage () {
 
-    //Pushes initials into array
+    if (initialFill.value === '' || initialFill.value.length > 20) {
+        submitButton.style.background = '#E83737';
+    } else {
+    //Pushes initials input into array
     initialList.push(initialFill.value);
 
-    //Sets visibility of pages
-    submitMenu.style.display = 'none';
-    highscoresMenu.style.display = '';
-
     //Stores score in local storage !Needs work
-    localStorage.setItem('Score:', scoreList);
-    localStorage.setItem('Initials:', initialList);
-    
-    //Creates a list item
-    var li = document.createElement('li');
+    localStorage.setItem('Score', JSON.stringify(scoreList));
+    localStorage.setItem('Initials', JSON.stringify(initialList));
+    submitButton.style.background = '#87FE00'
+    submitButton.innerHTML = 'Submitted!'
+    setTimeout(highscoreLinkPage, 1500);
+}}
 
-    //Fill list element with Initials and score
-    li.innerText = `Player: ${initialFill.value} | Score: ${currentScore}`;
-
-    //Inserts li into highscoreList ul
-    highscoreList.append(li);       
-}
-
-
-//Resets the quiz
-function reset () {
+//Takes you back to start menu
+function retakeQuiz () {
     questionMenu.style.display = 'none';
     highscoresMenu.style.display = 'none';
     submitMenu.style.display = 'none';
     startMenu.style.display = '';
 
+    submitButton.style.background = '#FFFFFF';
+    submitButton.innerHTML = 'Submit';
     //Resets Score
     currentScore = 0;
     currentQuestion = 0;
+    highscoreList.innerHTML = '';
 }
 
+//Starts timer
+function reset () {
+    secondsLeft = 100;
+    timeLeft.textContent = 100;
+    setTimeout(retakeQuiz, 100);   
+}
+
+//Clears highscores from local storage
 function clearScores () {
     highscoreList.innerHTML = '';
     initialList = [];
     scoreList = [];
     localStorage.clear();
+    resetQuizButton.innerHTML = 'Retake Quiz';
+
 }
 
 /* ------------------------------Questions/Answers-----------------------------------------*/
-
 var questions = [ 
 
     { 
@@ -299,16 +313,57 @@ var questions = [
         question: 'Which of these methods will add an element to the beginning of an array?', 
             answers: ['push()', 'shift()', 'concat()', 'unshift()'], 
                 correct: 'unshift()'
-    }
+    },
+
+
+    {
+        question: 'Which method sets a timer that executes a function when it expires?', 
+            answers: ['setInterval()', 'setTimer()', 'setTimeout(func, time)', 'all of the above'], 
+                correct: 'setTimeout(func, time)' 
+    },
+
+
+    {
+        question: 'Which one of these will store items in the localStorage?', 
+            answers: ['localStorage.getItem()', 'JSON.stringify()', 'localStorage.setItem()', 'JSON.parse()'], 
+                correct: 'localStorage.setItem()' 
+    },
+
+
+    {
+        question: 'Which DOM method is used to select this element?           <h1 id=\'hero\'</h1>?', 
+            answers: ['document.querySelector(hero)','document.getElementbyClass(\'hero\')','document.getElementbyId(\'#hero\')','none of the above'], 
+                correct: 'document.getElementbyId(\'#hero\')' 
+    },
+
+
+    {
+        question: 'What is Javascript?', 
+            answers: ['Type of coffee','Typewriter Ink','A programming language','I have no idea.'], 
+                correct: 'A programming language' 
+    },
+
+
+    {
+        question: 'How many perimeters does an eventListener require?', 
+            answers: ['4','3','2','1'], 
+                correct: '2' 
+    },
+
+
+    {
+        question: 'Which one of these could you not use to change the text inside of an HTML element?', 
+            answers: ['setItem()','.value','.textContent','.innerHTML'], 
+                correct: 'setItem()' 
+    },
+
+
+    {
+        question: 'What will be returned if a localStorage is empty?', 
+            answers: ['An empty string','null','undefined','0'], 
+                correct: 'null' 
+    },
 ]
-
-
-//------------------------------------Experimental Code -----------------------------------------------------
-
-// function storedScores () {
-//     localStorage.setIem('scoreList', JSON.stringify(scoreList));
-// }
-
 
 
 
