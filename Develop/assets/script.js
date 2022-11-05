@@ -252,107 +252,107 @@ function clearScores () {
 var questions = [ 
 
     { 
-        question: 'What is max cash in Runescape?', 
-        answers: ['100 billion', '2.147bil', '15 thread', 'Evil Dave'], 
-            correct: '2.147bil'
+        question: 'What method is used to print to the console?', 
+        answers: ['.push()', '.pop()', '.concat()', 'console.log()'], 
+            correct: 'console.log()'
     },
 
 
     { 
-    question: 'What does Raksha, the stinky Barnie, drop when killed?', 
-    answers: ['Pack of beef Jerky', 'Buckets of sand', 'Dragon Claws', 'Stone Spirits'],
-        correct: 'Stone Spirits'
+    question: 'What statement creates a loop that executes as long as the condition is (!true)?', 
+    answers: ['for', 'do while', 'while', 'if else'],
+        correct: 'do while'
 
     },
 
 
     {
-        question:'Who is the best Raksha Slayer?',
-            answers: ['CodyDucker', 'Fish', 'George Clooney', 'Some old Dwarf'], 
-                correct: 'CodyDucker'
+        question:'What tag is used to link Javascript to HTML?',
+            answers: ['<link>', '<div>', '<script>', '<button>'], 
+                correct: '<script>'
     },
 
 
 
 
     {
-        question: 'How many fingers am I holding up right now?', 
-            answers: ['1', '2', '3', 'What are fingers?'], 
-                correct: 'What are fingers?'
+        question: 'Which one of these data types is a boolean value?', 
+            answers: ['null', 'string', 'false', 'bigInt'], 
+                correct: 'false'
 
-    }
-
-
-    
-    //     question: 'Which one is a DOM property that allows modifying element classes? ', 
-    //         answers:['.classList', '.appendChild', '.textContent', '.createElement'], 
-    //             correct: '.classList'
-
-    // },
+    },
 
 
-    // {
-    //     question: 'What are the possible types of events for the addEventLister method?', 
-    //         answers: ['click', 'mousewheel', 'scroll', 'all of the above'], 
-    //             correct: 'all of the above'
+    {
+        question: 'Which one is a DOM property that allows modifying element classes? ', 
+            answers:['.classList', '.appendChild', '.textContent', '.createElement'], 
+                correct: '.classList'
 
-    // },  
-
-
-    // {
-    //     question: 'Which of these methods will add an element to the beginning of an array?', 
-    //         answers: ['push()', 'shift()', 'concat()', 'unshift()'], 
-    //             correct: 'unshift()'
-    // },
+    },
 
 
-    // {
-    //     question: 'Which method sets a timer that executes a function when it expires?', 
-    //         answers: ['setInterval()', 'setTimer()', 'setTimeout(func, time)', 'all of the above'], 
-    //             correct: 'setTimeout(func, time)' 
-    // },
+    {
+        question: 'What are the possible types of events for the addEventLister method?', 
+            answers: ['click', 'mousewheel', 'scroll', 'all of the above'], 
+                correct: 'all of the above'
+
+    },  
 
 
-    // {
-    //     question: 'Which one of these will store items in the localStorage?', 
-    //         answers: ['localStorage.getItem()', 'JSON.stringify()', 'localStorage.setItem()', 'JSON.parse()'], 
-    //             correct: 'localStorage.setItem()' 
-    // },
+    {
+        question: 'Which of these methods will add an element to the beginning of an array?', 
+            answers: ['push()', 'shift()', 'concat()', 'unshift()'], 
+                correct: 'unshift()'
+    },
 
 
-    // {
-    //     question: 'Which DOM method is used to select this element?           <h1 id=\'hero\'</h1>?', 
-    //         answers: ['document.querySelector(hero)','document.getElementbyClass(\'hero\')','document.getElementbyId(\'#hero\')','none of the above'], 
-    //             correct: 'document.getElementbyId(\'#hero\')' 
-    // },
+    {
+        question: 'Which method sets a timer that executes a function when it expires?', 
+            answers: ['setInterval()', 'setTimer()', 'setTimeout(func, time)', 'all of the above'], 
+                correct: 'setTimeout(func, time)' 
+    },
 
 
-    // {
-    //     question: 'What is Javascript?', 
-    //         answers: ['Type of coffee','Typewriter Ink','A programming language','I have no idea.'], 
-    //             correct: 'A programming language' 
-    // },
+    {
+        question: 'Which one of these will store items in the localStorage?', 
+            answers: ['localStorage.getItem()', 'JSON.stringify()', 'localStorage.setItem()', 'JSON.parse()'], 
+                correct: 'localStorage.setItem()' 
+    },
 
 
-    // {
-    //     question: 'How many perimeters does an eventListener require?', 
-    //         answers: ['4','3','2','1'], 
-    //             correct: '2' 
-    // },
+    {
+        question: 'Which DOM method is used to select this element?           <h1 id=\'hero\'</h1>?', 
+            answers: ['document.querySelector(hero)','document.getElementbyClass(\'hero\')','document.getElementbyId(\'#hero\')','none of the above'], 
+                correct: 'document.getElementbyId(\'#hero\')' 
+    },
 
 
-    // {
-    //     question: 'Which one of these could you not use to change the text inside of an HTML element?', 
-    //         answers: ['setItem()','.value','.textContent','.innerHTML'], 
-    //             correct: 'setItem()' 
-    // },
+    {
+        question: 'What is Javascript?', 
+            answers: ['Type of coffee','Typewriter Ink','A programming language','I have no idea.'], 
+                correct: 'A programming language' 
+    },
 
 
-    // {
-    //     question: 'What will be returned if a localStorage is empty?', 
-    //         answers: ['An empty string','null','undefined','0'], 
-    //             correct: 'null' 
-    // },
+    {
+        question: 'How many perimeters does an eventListener require?', 
+            answers: ['4','3','2','1'], 
+                correct: '2' 
+    },
+
+
+    {
+        question: 'Which one of these could you not use to change the text inside of an HTML element?', 
+            answers: ['setItem()','.value','.textContent','.innerHTML'], 
+                correct: 'setItem()' 
+    },
+
+
+    {
+        question: 'What will be returned if a localStorage is empty?', 
+            answers: ['An empty string','null','undefined','0'], 
+                correct: 'null' 
+    },
 ]
 
 
