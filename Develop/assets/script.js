@@ -42,7 +42,7 @@ var resetScores = document.querySelector('#clear-button');
 //Score
 var currentScore = 0; //Creates a score variable
 var scoreList = []; //Makes an array for saved scores
-var secondsLeft = 100 //Sets the timer to 0
+var secondsLeft = 40 //Sets the timer to 0
 timeLeft.textContent = secondsLeft;
 //Question number index
 var currentQuestion = 0;
@@ -73,7 +73,7 @@ resetScores.addEventListener('click', clearScores); //Deletes previously saved h
 /*-------------------------------------------Functions--------------------------------------------------*/
 //Sets timer
 function setTime() {
-    secondsLeft = 100;
+    secondsLeft = 40;
     var timerInterval = setInterval(function () {
         secondsLeft--;
         timeLeft.textContent = secondsLeft;
@@ -85,6 +85,8 @@ function setTime() {
             //Displays score in submitMenu page.
             scoreResult.textContent = currentScore;
             scoreList.push(currentScore);
+
+
 
         } 
     }, 1000)
@@ -145,7 +147,7 @@ function selectAnswer(event) {
             currentQuestion++;
         }
 
-        setTimeout(nextQuestion, 1000);
+        setTimeout(nextQuestion, 500);
     }
     
 //Next Question
@@ -218,12 +220,12 @@ function highScorePage () {
     //Pushes initials input into array
     initialList.push(initialFill.value);
 
-    //Stores score in local storage !Needs work
+    //Stores score in local storage
     localStorage.setItem('Score', JSON.stringify(scoreList));
     localStorage.setItem('Initials', JSON.stringify(initialList));
     submitButton.style.background = '#87FE00'
     submitButton.innerHTML = 'Submitted!'
-    setTimeout(highscoreLinkPage, 1500);
+    setTimeout(highscoreLinkPage, 200);
 }}
 
 //Takes you back to start menu
@@ -243,8 +245,8 @@ function retakeQuiz () {
 
 //Starts timer
 function reset () {
-    secondsLeft = 100;
-    timeLeft.textContent = 100;
+    secondsLeft = 40;
+    timeLeft.textContent = secondsLeft;
     setTimeout(retakeQuiz, 100);   
 }
 
