@@ -36,6 +36,7 @@ var currentScore = 0; //Creates a score variable
 var scoreList = []; //Makes an array for saved scores
 var secondsLeft = 40 //Sets the timer to 0
 timeLeft.textContent = secondsLeft;
+
 //Question number index
 var currentQuestion = 0;
 
@@ -46,7 +47,7 @@ var initialList = [];
 var localScores = JSON.parse(localStorage.getItem('Score'));
 var localInitials = JSON.parse(localStorage.getItem('Initials'));
 
-//--------------------Sets the visibility of the pages-------------------------
+//--------------------Sets the visibility of the start page-------------------------
 questionMenu.style.display = 'none';
 highscoresMenu.style.display = 'none';
 submitMenu.style.display = 'none';
@@ -131,7 +132,7 @@ function selectAnswer(event) {
             event.target.innerText = 'Incorrect!';
             timeLeft.style.color = '#E83737';
             //Score update
-            secondsLeft -= 10;
+            secondsLeft -= 5;
             currentQuestion++;
         }
 
@@ -196,7 +197,7 @@ function highscoreLinkPage () {
                 //Inserts li into highscoreList ul
                 highscoreList.append(li);
         }
-    } else {
+    } else if (startMenu === ''){
         highscoresMenu.style.display = ''
         startMenu.style.display = 'none';
         submitMenu.style.display = 'none';
@@ -263,7 +264,7 @@ var questions = [
 
 
     { 
-    question: 'What statement creates a loop that executes as long as the condition is (!true)?', 
+    question: 'What statement creates a loop that executes as long as the condition is not true?', 
     answers: ['for', 'do while', 'while', 'if else'],
         correct: 'do while'
 
@@ -325,9 +326,9 @@ var questions = [
 
 
     {
-        question: 'Which DOM method is used to select this element?           <h1 id=\'hero\'</h1>?', 
-            answers: ['document.querySelector(hero)','document.getElementbyClass(\'hero\')','document.getElementbyId(\'#hero\')','none of the above'], 
-                correct: 'document.getElementbyId(\'#hero\')' 
+        question: 'Which expression is the most useful and least intrusive debugging tool?', 
+            answers: ['Console.log(x)', 'prompt(x)', 'alert(x)', 'confirm(x)'], 
+                correct: 'Console.log(x)' 
     },
 
 
@@ -357,6 +358,13 @@ var questions = [
             answers: ['An empty string','null','undefined','0'], 
                 correct: 'null' 
     },
+
+
+    {
+        question: 'Which are the correct “if” statements to execute certain code if “x” is equal to 2?', 
+            answers: ['if (x2)','if (x!=2)','if (x==2)','if (x=2)'], 
+                correct: 'if (x==2)' 
+    }
 ]
 
 
