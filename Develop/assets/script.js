@@ -126,7 +126,7 @@ function selectAnswer(event) {
             ;
         } else {
             //Styling
-            tempResult.textContent = '-10 seconds!';
+            tempResult.textContent = '-5 seconds!';
             tempResult.style.color = '#E83737';
             event.target.style.background = '#E83737';
             event.target.innerText = 'Incorrect!';
