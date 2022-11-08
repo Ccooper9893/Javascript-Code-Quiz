@@ -197,7 +197,7 @@ function highscoreLinkPage () {
                 //Inserts li into highscoreList ul
                 highscoreList.append(li);
         }
-    } else if (startMenu === ''){
+    } else if (startMenu.style.display === ''){
         highscoresMenu.style.display = ''
         startMenu.style.display = 'none';
         submitMenu.style.display = 'none';
